@@ -1,35 +1,21 @@
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
 import Dashboard from "../pages/Dashboard";
 import Users from "../pages/Users";
 import Products from "../pages/Products";
 import Orders from "../pages/Orders";
-import Login from "../pages/Login";
 import Analytics from "../pages/Analytics";
 import Marketing from "../pages/Marketing";
 import Settings from "../pages/Settings";
 import Support from "../pages/Support";
 
 export default function AppRouter() {
-
-  const isAuth = localStorage.getItem("auth") === "true";
-
   return (
     <HashRouter>
       <Routes>
 
-        {}
-        <Route
-          path="/login"
-          element={isAuth ? <Navigate to="/" /> : <Login />}
-        />
-
-        {}
-        <Route
-          path="/"
-          element={isAuth ? <Layout /> : <Navigate to="/login" />}
-        >
+        <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="users" element={<Users />} />
           <Route path="products" element={<Products />} />
@@ -39,9 +25,6 @@ export default function AppRouter() {
           <Route path="settings" element={<Settings />} />
           <Route path="support" element={<Support />} />
         </Route>
-
-        {}
-        <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
 
       </Routes>
     </HashRouter>

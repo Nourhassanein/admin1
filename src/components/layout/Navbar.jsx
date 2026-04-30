@@ -36,10 +36,7 @@ export default function Navbar() {
         {}
         <button
           className="btn btn-sm btn-danger"
-          onClick={() => {
-            localStorage.removeItem("auth");
-            navigate("/login");
-          }}
+          onClick={() => navigate("/")}
         >
           Logout
         </button>
