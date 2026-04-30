@@ -9,22 +9,18 @@ export default function Login() {
     const email = form.email?.trim();
     const password = form.password?.trim();
 
-    // empty check
+    
     if (!email || !password) {
       alert("Please fill email and password");
       return;
     }
 
-    // login check
+    
     if (email !== "admin@gmail.com" || password !== "1234") {
       alert("Invalid credentials ❌");
       return;
     }
-
-    // save login
     localStorage.setItem("auth", "true");
-
-    // redirect to dashboard (HashRouter safe)
     window.location.hash = "/";
   };
 

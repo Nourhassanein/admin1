@@ -2,6 +2,7 @@ import { useState } from "react";
 import { orders } from "../data/orders";
 import StatusBadge from "../components/ui/StatusBadge";
 import Pagination from "../components/common/Pagination";
+import { showToast } from "../utils/toast"; // ✅ ADD THIS
 
 export default function Orders() {
 
@@ -44,7 +45,7 @@ export default function Orders() {
             style={{ width: 220 }}
             onChange={(e) => {
               setSearch(e.target.value);
-              setPage(1); // ✅ reset
+              setPage(1);
             }}
           />
 
@@ -73,7 +74,20 @@ export default function Orders() {
 
                   <td>
                     <b>{o.id}</b><br />
-                    <small className="text-primary">View Details</small>
+
+                    {}
+                    <small
+                      className="text-primary cursor-pointer d-inline-flex align-items-center gap-1"
+                      style={{ fontWeight: 500 }}
+                      onClick={() =>
+                        showToast(
+                          `Order Details:\nID: ${o.id}\nCustomer: ${o.customer}\nDate: ${o.date}\nStatus: ${o.status}\nItems: ${o.items}\nTotal: $${o.total}`
+                        )
+                      }
+                    >
+                      View Details →
+                    </small>
+
                   </td>
 
                   <td>{o.customer}</td>
@@ -105,7 +119,6 @@ export default function Orders() {
 
       </div>
 
-      {/* ✅ PAGINATION */}
       <Pagination
         page={page}
         setPage={setPage}

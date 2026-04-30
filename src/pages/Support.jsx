@@ -1,9 +1,10 @@
 import { useState } from "react";
 import AIChat from "../components/ui/AIChat";
+import { showToast } from "../utils/toast";
 
 export default function Support() {
   const [openFAQ, setOpenFAQ] = useState(null);
-  const [openChat, setOpenChat] = useState(false);  
+  const [openChat, setOpenChat] = useState(false);
 
   const faqs = [
     {
@@ -28,7 +29,7 @@ export default function Support() {
     <>
       <div className="container-fluid">
 
-        {/* HEADER */}
+        {}
         <div className="mb-4">
           <h2 className="fw-bold">💬 Help & Support</h2>
           <p className="text-muted">Need help? We’re here for you.</p>
@@ -37,21 +38,19 @@ export default function Support() {
         {}
         <div className="row g-3 mb-4">
 
-          {}
           <div className="col-md-4">
             <div className="card shadow border-0 p-3 text-center">
               <h5>📘 Documentation</h5>
               <p className="text-muted small">System guide</p>
               <button
                 className="btn btn-outline-primary btn-sm"
-                onClick={() => alert("Docs coming soon 📘")}
+                onClick={() => showToast("Docs coming soon 📘")}
               >
                 View Docs
               </button>
             </div>
           </div>
 
-          {}
           <div className="col-md-4">
             <div className="card shadow border-0 p-3 text-center">
               <h5>🎥 Video Tutorials</h5>
@@ -65,14 +64,13 @@ export default function Support() {
             </div>
           </div>
 
-          {}
           <div className="col-md-4">
             <div className="card shadow border-0 p-3 text-center">
               <h5>⚡ Live Chat</h5>
               <p className="text-muted small">Instant help</p>
               <button
                 className="btn btn-primary btn-sm"
-                onClick={() => setOpenChat(true)} // ✅ CLEAN
+                onClick={() => setOpenChat(true)}
               >
                 Start Chat
               </button>
@@ -114,7 +112,26 @@ export default function Support() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              alert("Message sent ✅");
+
+              const name = e.target[0].value.trim();
+              const email = e.target[1].value.trim();
+              const message = e.target[2].value.trim();
+
+              
+              if (!name || !email || !message) {
+                showToast("⚠️ Please fill all fields");
+                return;
+              }
+
+              
+              if (!email.includes("@")) {
+                showToast("⚠️ Enter a valid email");
+                return;
+              }
+
+              showToast("Message sent successfully ✅");
+
+              e.target.reset();
             }}
           >
             <div className="row g-2">
@@ -141,7 +158,7 @@ export default function Support() {
 
       </div>
 
-      {/* ✅ CONTROLLED CHAT */}
+      {/* CHAT */}
       <AIChat open={openChat} setOpen={setOpenChat} />
     </>
   );

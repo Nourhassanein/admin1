@@ -33,7 +33,7 @@ export default function Navbar() {
           <div><b>Admin</b></div>
         </div>
 
-        {/* ✅ LOGOUT */}
+        {}
         <button
           className="btn btn-sm btn-danger"
           onClick={() => {

@@ -258,7 +258,7 @@ export default function Products() {
         totalPages={Math.ceil(filtered.length / perPage)}
       />
 
-      {/* ✅ FIXED MODAL */}
+      {}
       {show && (
         <div className="modal fade show d-block">
           <div className="modal-dialog">

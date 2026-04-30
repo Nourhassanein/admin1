@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { users } from "../data/users";
 import Pagination from "../components/common/Pagination";
+import { showToast } from "../utils/toast"; // ✅ ADD THIS
 
 export default function Users() {
 
@@ -9,13 +10,11 @@ export default function Users() {
 
   const perPage = 2;
 
-  // ✅ SEARCH FILTER
   const filtered = users.filter(u =>
     u.name.toLowerCase().includes(search.toLowerCase()) ||
     u.id.toLowerCase().includes(search.toLowerCase())
   );
 
-  // ✅ PAGINATION LOGIC
   const paginated = filtered.slice(
     (page - 1) * perPage,
     page * perPage
@@ -24,7 +23,7 @@ export default function Users() {
   return (
     <div>
 
-      {/* HEADER */}
+      {}
       <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <div>
           <h6 className="text-muted mb-1">Customers / Users</h6>
@@ -46,14 +45,14 @@ export default function Users() {
             style={{ width: 220 }}
             onChange={(e) => {
               setSearch(e.target.value);
-              setPage(1); // ✅ reset page on search
+              setPage(1);
             }}
           />
 
         </div>
       </div>
 
-      {/* TABLE */}
+      {}
       <div className="card shadow-sm border-0">
 
         <div className="table-responsive">
@@ -75,8 +74,18 @@ export default function Users() {
 
                   <td>
                     <div className="fw-bold">{u.id}</div>
-                    <small className="text-primary cursor-pointer">
-                      View Details
+
+                    {/* ✅ NOW PROFESSIONAL + TOAST */}
+                    <small
+                      className="text-primary cursor-pointer"
+                      style={{ fontWeight: 500 }}
+                      onClick={() =>
+                        showToast(
+                          `User: ${u.name}\nID: ${u.id}\nOrders: ${u.orders}\nTotal Spent: $${u.total}`
+                        )
+                      }
+                    >
+                      View Details →
                     </small>
                   </td>
 
@@ -104,7 +113,6 @@ export default function Users() {
                 </tr>
               ))}
 
-              {/* ✅ EMPTY STATE */}
               {paginated.length === 0 && (
                 <tr>
                   <td colSpan="5" className="text-center text-muted p-4">
@@ -120,7 +128,7 @@ export default function Users() {
 
       </div>
 
-      {/* ✅ PAGINATION */}
+      {}
       <Pagination
         page={page}
         setPage={setPage}

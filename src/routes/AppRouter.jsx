@@ -19,13 +19,13 @@ export default function AppRouter() {
     <HashRouter>
       <Routes>
 
-        {/* LOGIN */}
+        {}
         <Route
           path="/login"
           element={isAuth ? <Navigate to="/" /> : <Login />}
         />
 
-        {/* PROTECTED */}
+        {}
         <Route
           path="/"
           element={isAuth ? <Layout /> : <Navigate to="/login" />}
@@ -40,7 +40,7 @@ export default function AppRouter() {
           <Route path="support" element={<Support />} />
         </Route>
 
-        {/* FALLBACK */}
+        {}
         <Route path="*" element={<Navigate to={isAuth ? "/" : "/login"} />} />
 
       </Routes>
