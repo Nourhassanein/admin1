@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 export default function Layout() {
   return (
-    <div className="d-flex">
+    <div className="d-flex flex-column flex-md-row">
 
       <Sidebar />
 

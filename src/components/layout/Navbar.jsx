@@ -10,7 +10,7 @@ export default function Navbar() {
     <div className="navbar-custom d-flex justify-content-between px-4 shadow-sm">
 
       <input
-        className="form-control w-50"
+        className="form-control w-100 w-md-50"
         placeholder="Search products, orders..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
